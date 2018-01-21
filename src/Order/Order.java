@@ -14,6 +14,30 @@ import javax.swing.plaf.synth.SynthSpinnerUI;
  *
  */
 public class Order {
+	
+	public  Order()
+	{
+		
+	}
+	public Order(Order O)
+	{
+		super();
+		this.ord_ID = O.ord_ID;
+		this.type = O.type;
+		this.product = O.product;
+		this.price = O.price;
+		this.qty = O.qty;
+		this.cust_ID = O.cust_ID;
+	}
+	public Order(String ord_ID, String type, String product,  int price, int qty, String cust_ID) {
+		super();
+		this.ord_ID = ord_ID;
+		this.type = type;
+		this.product = product;
+		this.price = price;
+		this.qty = qty;
+		this.cust_ID = cust_ID;
+	}
 
 	String ord_ID;
 	String type;
@@ -22,6 +46,7 @@ public class Order {
 	int price;
 	int qty;
 	String cust_ID;
+	
 
 	public void read() {
 		Scanner s = new Scanner(System.in);

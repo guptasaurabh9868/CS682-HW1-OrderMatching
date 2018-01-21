@@ -5,39 +5,47 @@ import java.util.ArrayList;
 public class OrderProcessing {
 	private ArrayList<Order> orderQueue = new ArrayList<Order>();
 
-	public void Process( Order order) {
+	public ArrayList<Order> Process( Order order) {
 		int lenth = orderQueue.size();
+		ArrayList<Order> matched = new ArrayList<Order>();
 		if ("Sell".equalsIgnoreCase(order.type)) {
 			int i = 0;
 			while (lenth-- > 0) {
 				Order o = orderQueue.get(i++);
 				if (("Buy".equalsIgnoreCase(o.type)) && (o.product.equalsIgnoreCase(order.product))
 						&& (o.price >= order.price)) {
-					if (o.qty > order.qty) {
+					Order o1 = new Order(o);
+					matched.add(o1);
+					if (o.qty >= order.qty) {
 						o.qty -= order.qty;
+						o1.qty = order.qty;
 						order.qty = 0;
 						break;
 					} else {
 						order.qty -= o.qty;
 						o.qty = 0;
+						o1.qty = 0;
 						continue;
 					}
 				}
 			}
 		} else {
-			System.out.println("HERE");
 			int i = 0;
 			while (lenth-- > 0) {
 				Order o = orderQueue.get(i++);
 				if ("Sell".equalsIgnoreCase(o.type) && (o.product.equalsIgnoreCase(order.product))
 						&& (o.price <= order.price)) {
+					Order o1 = new Order(o);
+					matched.add(o1);
 					if (o.qty >= order.qty) {
 						o.qty -= order.qty;
+						o1.qty = order.qty;
 						order.qty = 0;
 						break;
 					} else {
 						order.qty -= o.qty;
 						o.qty = 0;
+						o1.qty = 0;
 						continue;
 					}
 				}
@@ -45,22 +53,33 @@ public class OrderProcessing {
 		}
 		orderQueue.add(order);
 		System.out.println(orderQueue);
+		return matched;
 	}
 
 	public ArrayList<Order> getOrderQueue() {
 		return orderQueue;
 
 	}
-	public void pending() {
+	public void pending(ArrayList<Order> matched) {
 		// TODO Auto-generated method stub
-		int lenth = orderQueue.size();
-		System.out.println("Number of orders left : " + lenth);
-		int i=0;
-		while(lenth-- > 0)
+		for(int i=0;i<orderQueue.size();)
 		{
-			System.out.println("\nORDER #"+(i+1));
-			Order order = orderQueue.get(i++);
-			if(order.qty != 0) order.show();
+			Order order = orderQueue.get(i);
+			if(order.qty != 0) 
+				{
+				System.out.println("Order #"+i++);
+				order.show();
+				}
+			else
+			{
+				orderQueue.remove(order);
+			}
 		}
+	}
+
+	public void matched(ArrayList<Order> matched) {
+		// TODO Auto-generated method stub
+		for(int i=0;i<matched.size();i++)
+			matched.get(i).show();
 	}
 }

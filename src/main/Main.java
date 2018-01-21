@@ -22,10 +22,13 @@ public class Main {
 					"Provide Order Details : \n [orderID : Type : Product : Price : Quantity : CustID]\n");
 			O1.read();  								 ///Reading new orders
 //			orders.add(O1);							//Added in the list                           
-			orderProcessing.Process(O1);								// Finding the match
+			ArrayList<Order> matched = orderProcessing.Process(O1);								// Finding the match
+			
+			System.out.println("Matched Orders are : ");
+			orderProcessing.matched(matched);
 			System.out.println("\nPending Orders till now are : ");
 			
-			orderProcessing.pending();								//Pending orders.
+			orderProcessing.pending(matched);								//Pending orders.
 			System.out.println("\nWant to add new order : [y/n] \n ");
 			@SuppressWarnings("resource")
 			Scanner s = new Scanner(System.in);
