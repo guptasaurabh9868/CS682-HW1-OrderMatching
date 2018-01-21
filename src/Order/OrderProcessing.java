@@ -2,12 +2,20 @@ package Order;
 
 import java.util.ArrayList;
 
+//Class for Processing the Orders 
 public class OrderProcessing {
+	
+	//OrderQueue in which all Orders are added and removed if they got a match.
 	private ArrayList<Order> orderQueue = new ArrayList<Order>();
 
+	//Processing Logic
 	public ArrayList<Order> Process( Order order) {
 		int lenth = orderQueue.size();
+		
+		//Matched Queue for storing the matched orders at that time only i.e. why i have declared locally so that it will persist for more than one orders.
 		ArrayList<Order> matched = new ArrayList<Order>();
+		
+		//if current order is sell type order
 		if ("Sell".equalsIgnoreCase(order.type)) {
 			int i = 0;
 			while (lenth-- > 0) {
@@ -29,7 +37,9 @@ public class OrderProcessing {
 					}
 				}
 			}
-		} else {
+		}
+		//if current order is buy type order 
+		else {
 			int i = 0;
 			while (lenth-- > 0) {
 				Order o = orderQueue.get(i++);
@@ -56,27 +66,33 @@ public class OrderProcessing {
 		return matched;
 	}
 
+	//getting the Current OrderQueue
 	public ArrayList<Order> getOrderQueue() {
 		return orderQueue;
 
 	}
-	public void pending(ArrayList<Order> matched) {
+	
+	//Function for pending orders
+	public void pending() {
 		// TODO Auto-generated method stub
 		for(int i=0;i<orderQueue.size();)
 		{
 			Order order = orderQueue.get(i);
 			if(order.qty != 0) 
 				{
+				//prints only non-zero quantity orders
 				System.out.println("Order #"+i++);
 				order.show();
 				}
 			else
-			{
+			{ 
+				//remove the zero quantity orders
 				orderQueue.remove(order);
 			}
 		}
 	}
 
+	//Function for returning matched orders
 	public void matched(ArrayList<Order> matched) {
 		// TODO Auto-generated method stub
 		for(int i=0;i<matched.size();i++)

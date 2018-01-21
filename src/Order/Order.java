@@ -14,11 +14,23 @@ import javax.swing.plaf.synth.SynthSpinnerUI;
  *
  */
 public class Order {
+			
+	String ord_ID;
+	String type;
+	String product;
+	String pro_ID;
+	int price;
+	int qty;
+	String cust_ID;
 	
+	
+	//Empty Constructor
 	public  Order()
 	{
 		
 	}
+	
+	//Copy Constructor
 	public Order(Order O)
 	{
 		super();
@@ -29,6 +41,8 @@ public class Order {
 		this.qty = O.qty;
 		this.cust_ID = O.cust_ID;
 	}
+	
+	//Constructor for Initialization
 	public Order(String ord_ID, String type, String product,  int price, int qty, String cust_ID) {
 		super();
 		this.ord_ID = ord_ID;
@@ -38,15 +52,6 @@ public class Order {
 		this.qty = qty;
 		this.cust_ID = cust_ID;
 	}
-
-	String ord_ID;
-	String type;
-	String product;
-	String pro_ID;
-	int price;
-	int qty;
-	String cust_ID;
-	
 
 	public void read() {
 		Scanner s = new Scanner(System.in);
