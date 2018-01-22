@@ -73,7 +73,7 @@ public class OrderProcessing {
 	}
 	
 	//Function for pending orders
-	public void pending() {
+	public ArrayList<Order> pending() {
 		// TODO Auto-generated method stub
 		for(int i=0;i<orderQueue.size();)
 		{
@@ -90,6 +90,7 @@ public class OrderProcessing {
 				orderQueue.remove(order);
 			}
 		}
+		return orderQueue;
 	}
 
 	//Function for returning matched orders
