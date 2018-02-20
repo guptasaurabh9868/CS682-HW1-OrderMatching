@@ -13,7 +13,7 @@ public class Main {
 	 *///Main Function
 	public static void main(String[] args) {
 		// TODO Auto-generated method stub
-		char choice = 'n\0';
+		char choice = 'n';
 		int i = 0;
 		OrderProcessing orderProcessing = new OrderProcessing();
 		do {
